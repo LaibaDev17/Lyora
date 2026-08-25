@@ -11,12 +11,11 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
-# Force PostgreSQL for all environments in production (primary, cable, cache, queue)
+# Railway / Production ke liye PostgreSQL URL configuration
 production:
   primary: &primary_production
     adapter: postgresql
     encoding: unicode
-    # Fallback added so asset compilation doesn't crash during deployment
     url: <%= ENV.fetch("DATABASE_URL", "postgres://localhost/dummy_db") %>
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   
@@ -31,4 +30,3 @@ production:
   queue:
     <<: *primary_production
     migrations_paths: db/queue_migrate
-    # Updated config
