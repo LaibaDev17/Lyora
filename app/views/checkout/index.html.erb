@@ -1,0 +1,43 @@
+<h1>Checkout 🛍️</h1>
+
+<% total = 0 %>
+
+<% @cart_items.each do |item| %>
+
+  <% item_total = item.product.price * item.quantity %>
+  <% total += item_total %>
+
+  <div class="checkout-item">
+
+    <h2><%= item.product.name %></h2>
+
+    <p>
+      Quantity: <%= item.quantity %>
+    </p>
+
+    <p>
+      Price: Rs. <%= item.product.price %>
+    </p>
+
+    <p>
+      Item Total: Rs. <%= item_total %>
+    </p>
+
+  </div>
+
+<% end %>
+
+<hr>
+
+<h2>
+  Total: Rs. <%= total %>
+</h2>
+
+<%= button_to "Place Order",
+    orders_path,
+    method: :post,
+    class: "checkout-btn" %>
+
+<br><br>
+
+<%= link_to "← Back to Cart", cart_items_path %>

@@ -1,0 +1,25 @@
+<div class="product-details">
+
+  <h1><%= @product.name %></h1>
+
+  <p class="description">
+    <%= @product.description %>
+  </p>
+
+  <p class="price">
+    Price: Rs. <%= @product.price %>
+  </p>
+
+  <p class="stock">
+    Stock: <%= @product.stock %>
+  </p>
+
+  <%= button_to "Add to Cart",
+      cart_items_path,
+      method: :post,
+      params: { product_id: @product.id },
+      class: "add-cart-btn" %>
+
+  <%= link_to "← Back to Shop", products_path, class: "back-link" %>
+
+</div>

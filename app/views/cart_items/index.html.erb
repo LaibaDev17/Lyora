@@ -1,0 +1,70 @@
+<h1>My Cart 🛒</h1>
+
+<% if @cart_items.empty? %>
+
+  <div class="empty-cart">
+    <h2>Your cart is empty 🛍️</h2>
+
+    <p>
+      Looks like you haven't added anything yet.
+    </p>
+
+    <%= link_to "Start Shopping", products_path %>
+  </div>
+
+<% else %>
+
+  <% total = 0 %>
+
+  <% @cart_items.each do |item| %>
+
+    <% item_total = item.product.price * item.quantity %>
+    <% total += item_total %>
+
+    <div class="cart-item">
+
+      <h2><%= item.product.name %></h2>
+
+      <p>
+        Price: Rs. <%= item.product.price %>
+      </p>
+
+      <div>
+
+        <%= button_to "-",
+            cart_item_path(item),
+            method: :patch,
+            params: { change: "decrease" } %>
+
+        <strong><%= item.quantity %></strong>
+
+        <%= button_to "+",
+            cart_item_path(item),
+            method: :patch,
+            params: { change: "increase" } %>
+
+      </div>
+
+      <p>
+        Item Total: Rs. <%= item_total %>
+      </p>
+
+      <%= button_to "Remove",
+          cart_item_path(item),
+          method: :delete %>
+
+    </div>
+
+  <% end %>
+
+  <hr>
+
+  <h2>
+    Total: Rs. <%= total %>
+  </h2>
+
+  <%= link_to "Continue Shopping", products_path %>
+
+  <%= link_to "Proceed to Checkout", "/checkout" %>
+
+<% end %>

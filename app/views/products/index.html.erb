@@ -1,0 +1,63 @@
+<section class="hero-section">
+
+  <div class="hero-content">
+    <p class="hero-tag">WELCOME TO LYORA</p>
+
+    <h1>Find Something You’ll Love 🛍️</h1>
+
+    <p>
+      Explore our collection of quality products at great prices.
+    </p>
+
+    <%= link_to "Shop Now", "#products", class: "hero-btn" %>
+  </div>
+
+</section>
+
+<section id="products" class="shop-section">
+
+  <h2 class="section-title">Our Products</h2>
+
+  <div class="products-container">
+
+    <% @products.each do |product| %>
+
+      <div class="product-card">
+
+        <div class="product-icon">
+          🛍️
+        </div>
+
+        <h2>
+          <%= link_to product.name, product_path(product) %>
+        </h2>
+
+        <p class="description">
+          <%= product.description %>
+        </p>
+
+        <p class="price">
+          Rs. <%= product.price %>
+        </p>
+
+        <p class="stock">
+          Stock: <%= product.stock %>
+        </p>
+
+        <%= button_to "Add to Cart",
+            cart_items_path,
+            method: :post,
+            params: { product_id: product.id },
+            class: "add-cart-btn" %>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
+</section>
+
+<div class="cart-link">
+  <%= link_to "🛒 View Cart", cart_items_path %>
+</div>

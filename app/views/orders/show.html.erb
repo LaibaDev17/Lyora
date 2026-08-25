@@ -1,0 +1,44 @@
+<h1>Order Confirmed! 🎉</h1>
+
+<p>Thank you for your order.</p>
+
+<p>
+  Order ID: <strong>#<%= @order.id %></strong>
+</p>
+
+<p>
+  Status: <strong><%= @order.status %></strong>
+</p>
+
+<hr>
+
+<h2>Order Details</h2>
+
+<% total = 0 %>
+
+<% @order.order_items.each do |item| %>
+
+  <% item_total = item.price * item.quantity %>
+  <% total += item_total %>
+
+  <div class="order-item">
+
+    <h3><%= item.product.name %></h3>
+
+    <p>Price: Rs. <%= item.price %></p>
+
+    <p>Quantity: <%= item.quantity %></p>
+
+    <p>Total: Rs. <%= item_total %></p>
+
+  </div>
+
+<% end %>
+
+<hr>
+
+<h2>Grand Total: Rs. <%= total %></h2>
+
+<br>
+
+<%= link_to "Continue Shopping", products_path %>
