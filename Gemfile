@@ -6,8 +6,8 @@ gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 # The modern asset pipeline for Rails
 gem "propshaft"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
+# Remove sqlite3 and use PostgreSQL for production/Railway deployment
+gem "pg", "~> 1.1"
 
 # Fiddle is required by Reline on Ruby 4.0
 gem "fiddle"
