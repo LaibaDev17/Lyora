@@ -11,22 +11,21 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
-# Railway / Production ke liye PostgreSQL URL configuration
 production:
   primary: &primary_production
     adapter: postgresql
     encoding: unicode
-    url: <%= ENV.fetch("DATABASE_URL", "postgres://localhost/dummy_db") %>
+    url: <%= ENV.fetch("DATABASE_URL") %>
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  
+
   cable:
     <<: *primary_production
     migrations_paths: db/cable_migrate
-  
+
   cache:
     <<: *primary_production
     migrations_paths: db/cache_migrate
-  
+
   queue:
     <<: *primary_production
     migrations_paths: db/queue_migrate
