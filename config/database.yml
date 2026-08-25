@@ -11,9 +11,16 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
-# Force PostgreSQL for all environments in production (including cache/queue)
+# Force PostgreSQL for all environments in production (primary, cable, cache, queue)
 production:
-  adapter: postgresql
-  encoding: unicode
-  url: <%= ENV["DATABASE_URL"] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  primary: &primary_production
+    adapter: postgresql
+    encoding: unicode
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  cable:
+    <<: *primary_production
+  cache:
+    <<: *primary_production
+  queue:
+    <<: *primary_production
