@@ -31,3 +31,4 @@ production:
   queue:
     <<: *primary_production
     migrations_paths: db/queue_migrate
+    # Updated config
