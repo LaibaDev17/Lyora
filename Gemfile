@@ -10,7 +10,7 @@ gem "propshaft"
 gem "pg", "~> 1.1"
 
 # Fiddle is required by Reline on Ruby 4.0
-gem "fiddle"
+#gem "fiddle"
 
 # Use the Puma web server
 gem "puma", ">= 5.0"
